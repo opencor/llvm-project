@@ -209,17 +209,12 @@ public:
   void addOption(Option *O, SubCommand *SC) {
     bool HadErrors = false;
     if (O->hasArgStr()) {
-      // If it's a DefaultOption, check to make sure it isn't already there.
-      if (O->isDefaultOption() &&
-          SC->OptionsMap.find(O->ArgStr) != SC->OptionsMap.end())
+      // Make sure it isn't already there.
+      if (SC->OptionsMap.find(O->ArgStr) != SC->OptionsMap.end())
         return;
 
       // Add argument to the argument map!
-      if (!SC->OptionsMap.insert(std::make_pair(O->ArgStr, O)).second) {
-        errs() << ProgramName << ": CommandLine Error: Option '" << O->ArgStr
-               << "' registered more than once!\n";
-        HadErrors = true;
-      }
+      SC->OptionsMap.insert(std::make_pair(O->ArgStr, O));
     }
 
     // Remember information about positional options.
