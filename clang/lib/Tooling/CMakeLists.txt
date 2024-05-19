@@ -28,6 +28,7 @@ if (NOT Python3_EXECUTABLE
     OR CMAKE_CROSSCOMPILING
     OR GENERATOR_IS_MULTI_CONFIG
     OR NOT LLVM_NATIVE_ARCH IN_LIST LLVM_TARGETS_TO_BUILD
+    OR LIBOPENCOR
     )
     configure_file(
       EmptyNodeIntrospection.inc.in
